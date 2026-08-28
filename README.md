@@ -1,3 +1,11 @@
+Nota: o aplicativo Next.js está dentro da pasta "cerne-mba/". Para iniciar localmente:
+
+  cd cerne-mba
+  npm install
+  npm run dev
+
+Certifique-se de usar Node.js 18+ (ou conforme definido em package.json -> engines).
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cerne — MBA em Inteligência Artificial Aplicada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0E14;
+    --surface: #12161F;
+    --surface-soft: rgba(23,28,39,0.4);
+    --border: #232938;
+    --border-soft: rgba(35,41,56,0.6);
+    --gold: #F2B705;
+    --violet: #6C63FF;
+    --ink: #F5F5F0;
+    --muted: #9AA0AC;
+    --green: #34D399;
+    --red: #F87171;
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body: "Plus Jakarta Sans", sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  a{ color: inherit; text-decoration: none; }
+  ul{ list-style:none; }
+  img,svg{ display:block; }
+  ::selection{ background: var(--gold); color: var(--bg); }
+
+  .container{ max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .container-md{ max-width: 820px; margin: 0 auto; padding: 0 24px; }
+  .container-sm{ max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
+  /* ===== reveal on scroll ===== */
+  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.is-visible{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
+    *{ animation: none !important; scroll-behavior:auto !important; }
+  }
+
+  /* ===== header ===== */
+  header{
+    position: fixed; top:0; left:0; right:0; z-index:50;
+    transition: background-color .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+  }
+  header.scrolled{
+    background: rgba(11,14,20,0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    height: 80px;
+  }
+  .logo{ display:flex; align-items:center; gap:8px; font-family:var(--font-display); font-weight:700; font-size:20px; letter-spacing:-0.01em; }
+  .logo-dot{ width:10px; height:10px; border-radius:50%; background: var(--gold); }
+  nav.main-nav{ display:none; gap:32px; font-size:14px; color:var(--muted); }
+  nav.main-nav a:hover{ color: var(--ink); }
+  .btn-gold{
+    display:inline-block; background: var(--gold); color: var(--bg);
+    font-family: var(--font-display); font-weight:700; font-size:14px;
+    padding: 10px 22px; border-radius:999px; border:none; cursor:pointer;
+    transition: background-color .2s ease, transform .2s ease;
+  }
+  .btn-gold:hover{ background:#fff; }
+  .btn-gold.lg{ font-size:17px; padding:16px 40px; box-shadow: 0 0 40px rgba(242,183,5,0.25); }
+  .btn-gold.lg:hover{ transform: scale(1.02); }
+
+  @media(min-width:768px){ nav.main-nav{ display:flex; } }
+
+  @media (max-width: 480px){
+    .eyebrow{ font-size:11px; letter-spacing:.06em; padding:8px 18px; white-space: normal; text-align:center; border-radius:20px; text-wrap:balance; }
+    .btn-gold.lg{ font-size:15px; padding:15px 28px; }
+  }
+
+  /* ===== hero ===== */
+  .hero{ position:relative; padding: 160px 0 96px; overflow:hidden; }
+  .hero-lines{ position:absolute; inset:0; z-index:-2; opacity:.6; }
+  .hero-lines span{ position:absolute; left:0; right:0; height:1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+  .hero-glow-1{ position:absolute; top:-160px; right:0; width:600px; height:600px; background:var(--violet); opacity:.18; border-radius:50%; filter: blur(140px); z-index:-2; }
+  .hero-glow-2{ position:absolute; top:-80px; left:0; width:400px; height:400px; background:var(--gold); opacity:.10; border-radius:50%; filter: blur(120px); z-index:-2; }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; color: var(--gold);
+    background: rgba(242,183,5,0.1); border:1px solid rgba(242,183,5,0.25);
+    border-radius:999px; padding:7px 16px; margin-bottom:32px;
+  }
+  .eyebrow .pulse{ width:6px; height:6px; border-radius:50%; background:var(--gold); animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+  .hero h1{
+    font-family: var(--font-display); font-weight:700; letter-spacing:-0.02em;
+    font-size: clamp(34px, 6vw, 58px); line-height:1.08; margin-bottom:24px;
+    text-wrap: balance;
+  }
+  .hero h1 em{ color: var(--gold); font-style: italic; }
+  .hero .lede{ font-size: clamp(17px,2vw,20px); color:var(--muted); max-width:640px; margin: 0 auto 40px; line-height:1.6; }
+
+  .check-list{ display:flex; flex-wrap:wrap; justify-content:center; gap: 12px 32px; margin-bottom:40px; font-size:14px; }
+  .check-list li{ display:flex; align-items:center; gap:8px; color: rgba(245,245,240,0.9); }
+  .check-list svg{ width:16px; height:16px; color: var(--gold); flex-shrink:0; }
+
+  .hero-cta{ text-align:center; }
+  .micro-copy{ font-family:var(--font-mono); font-size:12px; color:var(--muted); margin-top:16px; }
+
+  .center{ text-align:center; }
+
+  /* marquee */
+  .marquee-wrap{ margin-top:80px; }
+  .marquee-label{ text-align:center; font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; color:var(--muted); margin-bottom:24px; }
+  .marquee-mask{ position:relative; overflow:hidden; -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+  .marquee-track{ display:flex; width:max-content; gap:16px; animation: marquee 28s linear infinite; }
+  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  .marquee-group{ display:flex; gap:16px; }
+  .badge{
+    font-family:var(--font-mono); font-size:14px; color:var(--muted);
+    border:1px solid var(--border); border-radius:999px; padding:8px 20px; white-space:nowrap;
+  }
+
+  /* ===== sections generic ===== */
+  section{ padding: 96px 0; border-top:1px solid var(--border); }
+  .hero{ border-top:none; }
+  section.tint{ background: var(--surface-soft); }
+
+  .section-kicker{ font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; margin-bottom:12px; }
+  .kicker-gold{ color: var(--gold); }
+  .kicker-violet{ color: var(--violet); }
+
+  h2.section-title{ font-family:var(--font-display); font-weight:700; font-size: clamp(28px,4vw,36px); letter-spacing:-0.01em; }
+
+  .section-head{ text-align:center; margin-bottom:64px; }
+
+  /* ===== pillars ===== */
+  .grid-3{ display:grid; gap:20px; grid-template-columns:1fr; }
+  @media(min-width:768px){ .grid-3{ grid-template-columns:repeat(3,1fr);} }
+
+  .card{
+    position:relative; background:var(--surface); border:1px solid var(--border);
+    border-radius:16px; padding:32px;
+  }
+  .card-glow::before{
+    content:""; position:absolute; inset:-1px; border-radius:inherit;
+    background: linear-gradient(135deg, rgba(242,183,5,0.4), rgba(108,99,255,0.25), transparent 60%);
+    opacity:0; transition:opacity .4s ease; z-index:-1;
+  }
+  .card-glow:hover::before{ opacity:1; }
+
+  .icon-tile{ width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:24px; }
+  .icon-tile svg{ width:20px; height:20px; }
+  .tile-gold{ background:rgba(242,183,5,0.1); border:1px solid rgba(242,183,5,0.25); color:var(--gold); }
+  .tile-violet{ background:rgba(108,99,255,0.1); border:1px solid rgba(108,99,255,0.25); color:var(--violet); }
+  .tile-green{ background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.25); color:var(--green); }
+
+  .card h3{ font-family:var(--font-display); font-weight:600; font-size:20px; margin-bottom:12px; }
+  .card p{ color:var(--muted); font-size:14px; line-height:1.6; }
+
+  /* ===== methodology ===== */
+  .steps{ display:flex; flex-direction:column; gap:12px; }
+  .step{
+    position:relative; overflow:hidden; border:1px solid var(--border); border-radius:16px; padding:32px;
+  }
+  .step .num{
+    position:absolute; right:-8px; top:-24px; font-family:var(--font-display); font-weight:700;
+    font-size:96px; color: rgba(255,255,255,0.03); user-select:none;
+  }
+  .step .tag{ font-family:var(--font-mono); font-size:12px; color:var(--gold); margin-bottom:8px; }
+  .step h3{ font-family:var(--font-display); font-weight:600; font-size:20px; margin-bottom:8px; }
+  .step p{ color:var(--muted); font-size:14px; }
+  .step.final{ background: linear-gradient(135deg, rgba(242,183,5,0.1), rgba(108,99,255,0.1)); border-color: rgba(242,183,5,0.3); }
+  .step.final p{ color: rgba(245,245,240,0.8); }
+
+  /* ===== problem / solution ===== */
+  .lede-center{ text-align:center; color:var(--muted); max-width:640px; margin: 0 auto; line-height:1.7; }
+  .grid-2{ display:grid; gap:16px; grid-template-columns:1fr; margin-top:56px; }
+  @media(min-width:640px){ .grid-2{ grid-template-columns:1fr 1fr; } }
+  .compare-card{ background:var(--surface); border-radius:16px; padding:32px; }
+  .compare-old{ border:1px solid rgba(248,113,113,0.2); }
+  .compare-new{ border:1px solid rgba(52,211,153,0.2); }
+  .compare-label{ font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; margin-bottom:20px; }
+  .compare-card ul{ display:flex; flex-direction:column; gap:12px; font-size:14px; }
+  .compare-card li{ display:flex; align-items:center; gap:12px; }
+  .dot-old{ width:6px; height:6px; border-radius:50%; background:rgba(248,113,113,0.5); flex-shrink:0; }
+  .old-text{ color:var(--muted); text-decoration: line-through; text-decoration-color: rgba(248,113,113,0.5); }
+  .new-text{ color: rgba(245,245,240,0.9); }
+  .compare-new svg{ width:16px; height:16px; color:var(--green); flex-shrink:0; }
+
+  /* ===== stats ===== */
+  .stat-card{ text-align:center; border:1px solid var(--border); border-radius:16px; padding:32px; }
+  .stat-number{ font-family:var(--font-display); font-weight:700; font-size:48px; margin-bottom:8px; }
+  .stat-desc{ font-size:14px; color: rgba(245,245,240,0.8); margin-bottom:12px; }
+  .stat-source{ font-family:var(--font-mono); font-size:11px; color:var(--muted); }
+
+  /* ===== tools / bonus ===== */
+  .tool-list{ display:flex; flex-direction:column; gap:12px; margin-bottom:32px; }
+  .tool-row{
+    display:flex; align-items:center; justify-content:space-between;
+    border:1px solid var(--border); border-radius:12px; padding:20px 24px;
+  }
+  .tool-row .name{ font-family:var(--font-display); font-weight:600; }
+  .tool-row .items{ font-size:12px; color:var(--muted); margin-top:4px; }
+  .tool-row .price{ font-family:var(--font-mono); font-size:14px; color:var(--gold); white-space:nowrap; }
+
+  .total-box{
+    text-align:center; border-radius:16px; padding:32px;
+    background: linear-gradient(135deg, rgba(242,183,5,0.15), rgba(108,99,255,0.15));
+    border:1px solid rgba(242,183,5,0.3);
+  }
+  .total-box .label{ font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; color:var(--muted); margin-bottom:8px; }
+  .total-box .amount{ font-family:var(--font-display); font-weight:700; font-size: clamp(32px,5vw,48px); color:var(--gold); }
+
+  /* ===== institutional ===== */
+  .inst-card{ border:1px solid var(--border); border-radius:16px; padding:32px; }
+  .inst-card .name{ font-family:var(--font-display); font-weight:700; font-size:22px; margin-bottom:8px; }
+  .inst-card p{ font-size:14px; color:var(--muted); line-height:1.6; }
+  .fine-print{ text-align:center; font-family:var(--font-mono); font-size:11px; color:var(--muted); margin-top:24px; }
+
+  /* ===== tech grid ===== */
+  .tech-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap:12px; }
+  @media(min-width:640px){ .tech-grid{ grid-template-columns: repeat(3,1fr);} }
+  @media(min-width:900px){ .tech-grid{ grid-template-columns: repeat(4,1fr);} }
+  .tech-tile{
+    border:1px solid var(--border); border-radius:12px; padding:22px 12px; text-align:center;
+    font-family:var(--font-mono); font-size:14px; color: rgba(245,245,240,0.8);
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .tech-tile:hover{ border-color: rgba(242,183,5,0.4); color:var(--gold); }
+
+  /* ===== final cta ===== */
+  .final-cta{ position:relative; padding: 112px 0; text-align:center; overflow:hidden; }
+  .final-cta-glow{ position:absolute; top:0; left:50%; transform:translateX(-50%); width:700px; height:400px; background:var(--gold); opacity:.1; border-radius:50%; filter: blur(140px); z-index:-1; }
+  .final-cta h2{ font-family:var(--font-display); font-weight:700; font-size: clamp(28px,4vw,36px); margin-bottom:24px; }
+  .final-cta h2 em{ color:var(--gold); font-style:italic; }
+
+  /* ===== footer ===== */
+  footer{ border-top:1px solid var(--border); padding: 48px 0; }
+  .footer-top{ display:flex; flex-direction:column; align-items:center; gap:24px; }
+  @media(min-width:768px){ .footer-top{ flex-direction:row; justify-content:space-between; } }
+  .footer-links{ display:flex; flex-wrap:wrap; justify-content:center; gap:24px; font-size:12px; color:var(--muted); }
+  .footer-links a:hover{ color:var(--ink); }
+  .footer-legal{ margin-top:32px; padding-top:32px; border-top:1px solid var(--border-soft); }
+  .footer-legal p{ font-size:11px; color:var(--muted); line-height:1.6; max-width:760px; }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="container header-inner">
+    <a href="#top" class="logo"><span class="logo-dot"></span>Cerne</a>
+    <nav class="main-nav">
+      <a href="#pilares">Pilares</a>
+      <a href="#metodologia">Metodologia</a>
+      <a href="#ferramentas">Ferramentas</a>
+      <a href="#">Área do Aluno</a>
+    </nav>
+    <a href="#candidatura" class="btn-gold">Quero me candidatar</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-lines" aria-hidden="true">
+    <span style="top:25%"></span><span style="top:50%"></span><span style="top:75%"></span>
+  </div>
+  <div class="hero-glow-1" aria-hidden="true"></div>
+  <div class="hero-glow-2" aria-hidden="true"></div>
+
+  <div class="container-md center">
+    <div class="eyebrow"><span class="pulse"></span>50 BOLSAS LIBERADAS · ATÉ 50% DE DESCONTO</div>
+
+    <h1>Candidate-se para a bolsa do MBA em <em>Inteligência Artificial</em> Aplicada</h1>
+
+    <p class="lede">Diploma reconhecido, formação 100% prática e um arsenal de ferramentas de IA incluso — sem escrever uma linha de código.</p>
+
+    <ul class="check-list">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Reconhecimento MEC nota máxima</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Metodologia validada por +30 mil alunos</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>R$ 27 mil em ferramentas inclusas</li>
+    </ul>
+
+    <div class="hero-cta">
+      <a id="candidatura" href="#" class="btn-gold lg">QUERO ME CANDIDATAR À BOLSA</a>
+      <p class="micro-copy">Leva 2 minutos · Nosso time avalia seu perfil em até 48h</p>
+    </div>
+  </div>
+
+  <div class="marquee-wrap reveal">
+    <p class="marquee-label">FERRAMENTAS QUE VOCÊ VAI DOMINAR</p>
+    <div class="marquee-mask">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span class="badge">ChatGPT</span><span class="badge">Claude</span><span class="badge">Gemini</span>
+          <span class="badge">Midjourney</span><span class="badge">n8n</span><span class="badge">Zapier</span>
+          <span class="badge">Notion AI</span><span class="badge">Perplexity</span>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <span class="badge">ChatGPT</span><span class="badge">Claude</span><span class="badge">Gemini</span>
+          <span class="badge">Midjourney</span><span class="badge">n8n</span><span class="badge">Zapier</span>
+          <span class="badge">Notion AI</span><span class="badge">Perplexity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILARES -->
+<section id="pilares">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="section-kicker kicker-violet">O QUE VOCÊ LEVA</p>
+      <h2 class="section-title">Um MBA. Três conquistas.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card card-glow reveal">
+        <div class="icon-tile tile-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
+        <h3>Diploma com nota máxima no MEC</h3>
+        <p>Reconhecimento oficial que abre porta em processo seletivo, promoção interna e negociação de salário.</p>
+      </div>
+      <div class="card card-glow reveal" style="transition-delay:.1s">
+        <div class="icon-tile tile-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 100-8 4 4 0 000 8zm6 3c0-1.657-3.134-3-7-3s-7 1.343-7 3"/></svg></div>
+        <h3>Metodologia validada por +30 mil alunos</h3>
+        <p>Não é teoria de sala de aula: é o mesmo caminho prático que já formou dezenas de milhares de profissionais.</p>
+      </div>
+      <div class="card card-glow reveal" style="transition-delay:.2s">
+        <div class="icon-tile tile-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V6m0 10v2m9-8a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <h3>R$ 27 mil em ferramentas inclusas</h3>
+        <p>Acesso ao Hub de Ferramentas Cerne — as principais IAs do mercado, sem custo extra, durante todo o curso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METODOLOGIA -->
+<section id="metodologia" class="tint">
+  <div class="container-md">
+    <div class="section-head reveal">
+      <p class="section-kicker kicker-gold">A JORNADA</p>
+      <h2 class="section-title">Domine a inteligência artificial por dentro — sem programar.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="num">01</span>
+        <p class="tag">MÓDULO 01</p>
+        <h3>Você entende</h3>
+        <p>Fundamentos de IA generativa, prompt engineering e como as automações realmente funcionam por trás da cortina.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">02</span>
+        <p class="tag">MÓDULO 02</p>
+        <h3>Você domina</h3>
+        <p>Prática guiada nas ferramentas que o mercado usa de verdade: ChatGPT, Claude, Gemini, n8n e Zapier.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">03</span>
+        <p class="tag">MÓDULO 03</p>
+        <h3>Você aplica</h3>
+        <p>Cases reais, aplicados dentro do seu próprio negócio ou área de atuação — não em exercícios artificiais.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">04</span>
+        <p class="tag">MÓDULO 04</p>
+        <h3>Você se posiciona</h3>
+        <p>Portfólio, autoridade técnica e um posicionamento de carreira construído pra ser levado a sério.</p>
+      </div>
+      <div class="step final reveal">
+        <p class="tag">PROJETO INTEGRADOR</p>
+        <h3>O que você entrega</h3>
+        <p>Um sistema de automação com IA rodando de verdade, resolvendo um problema real da sua empresa ou da sua carreira — não um exercício de sala de aula.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA / SOLUÇÃO -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="section-title" style="max-width:640px;margin:0 auto 24px;">A IA já está decidindo quem sobe e quem fica pra trás.</h2>
+      <p class="lede-center">O mercado não está esperando ninguém se atualizar no próprio ritmo. Times inteiros já trocaram planilha manual por agente de IA, e quem ainda opera do jeito antigo vira, aos poucos, o gargalo do próprio time. Quem se posiciona agora sai na frente — não daqui a dois anos, quando isso for óbvio pra todo mundo.</p>
+    </div>
+    <div class="grid-2 reveal">
+      <div class="compare-card compare-old">
+        <p class="compare-label" style="color:var(--red)">MODO ANTIGO</p>
+        <ul>
+          <li><span class="dot-old"></span><span class="old-text">Planilhas manuais</span></li>
+          <li><span class="dot-old"></span><span class="old-text">Tarefas repetitivas</span></li>
+          <li><span class="dot-old"></span><span class="old-text">Retrabalho constante</span></li>
+          <li><span class="dot-old"></span><span class="old-text">Decisões no achismo</span></li>
+        </ul>
+      </div>
+      <div class="compare-card compare-new">
+        <p class="compare-label" style="color:var(--green)">MODO CERNE</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span class="new-text">Agentes de IA</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span class="new-text">Automações inteligentes</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span class="new-text">Análise preditiva</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span class="new-text">Decisões orientadas por dado</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DADOS -->
+<section class="tint">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="section-kicker kicker-violet">DADOS, NÃO ACHISMO</p>
+      <h2 class="section-title">Não é achismo. É o que os dados mostram.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="stat-card reveal">
+        <p class="stat-number" style="color:var(--gold)">+37%</p>
+        <p class="stat-desc">de salário médio pra quem domina IA generativa no dia a dia</p>
+        <p class="stat-source">Fonte: relatório de tendências, 2025 (dado ilustrativo)</p>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:.1s">
+        <p class="stat-number" style="color:var(--violet)">+156%</p>
+        <p class="stat-desc">de crescimento em vagas que citam IA generativa como requisito</p>
+        <p class="stat-source">Fonte: relatório de tendências, 2025 (dado ilustrativo)</p>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:.2s">
+        <p class="stat-number" style="color:var(--green)">72%</p>
+        <p class="stat-desc">das empresas já usam IA generativa em alguma parte da operação</p>
+        <p class="stat-source">Fonte: relatório de tendências, 2025 (dado ilustrativo)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FERRAMENTAS / BÔNUS -->
+<section id="ferramentas">
+  <div class="container-md">
+    <div class="section-head reveal">
+      <p class="section-kicker kicker-gold">HUB DE FERRAMENTAS CERNE</p>
+      <h2 class="section-title">O Hub de Ferramentas Cerne coloca dinheiro no seu bolso.</h2>
+    </div>
+    <div class="tool-list">
+      <div class="tool-row reveal">
+        <div><p class="name">Criação &amp; Produtividade</p><p class="items">ChatGPT Plus · Claude Pro · Notion AI</p></div>
+        <p class="price">R$ 3.600/ano</p>
+      </div>
+      <div class="tool-row reveal">
+        <div><p class="name">Automação</p><p class="items">n8n Cloud · Zapier Pro · Make</p></div>
+        <p class="price">R$ 4.800/ano</p>
+      </div>
+      <div class="tool-row reveal">
+        <div><p class="name">Dados &amp; Análise</p><p class="items">Julius AI · Perplexity Pro</p></div>
+        <p class="price">R$ 2.400/ano</p>
+      </div>
+    </div>
+    <div class="total-box reveal">
+      <p class="label">ECONOMIA ACUMULADA</p>
+      <p class="amount">R$ 27 MIL+ POR ANO</p>
+    </div>
+  </div>
+</section>
+
+<!-- AUTORIDADE INSTITUCIONAL -->
+<section class="tint">
+  <div class="container-md">
+    <div class="section-head reveal">
+      <h2 class="section-title">Quem assina esse MBA.</h2>
+    </div>
+    <div class="grid-2">
+      <div class="inst-card reveal">
+        <p class="name">Cerne</p>
+        <p>+30 mil alunos formados. Metodologia 100% prática, construída junto com quem aplica IA no mercado todos os dias.</p>
+      </div>
+      <div class="inst-card reveal" style="transition-delay:.1s">
+        <p class="name">Instituto Órbita</p>
+        <p>Instituição parceira, nota máxima no MEC. Responsável pela emissão do diploma de MBA reconhecido nacionalmente.</p>
+      </div>
+    </div>
+    <p class="fine-print">* Cerne e Instituto Órbita são marcas fictícias, criadas para fins de demonstração deste projeto.</p>
+  </div>
+</section>
+
+<!-- TECNOLOGIAS -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="section-title" style="margin-bottom:12px;">Tecnologias que você vai dominar.</h2>
+      <p class="lede-center">Ferramentas cobertas na prática, ao longo do curso — não afiliação ou certificação oficial dessas empresas.</p>
+    </div>
+    <div class="tech-grid reveal">
+      <div class="tech-tile">ChatGPT</div>
+      <div class="tech-tile">Claude</div>
+      <div class="tech-tile">Gemini</div>
+      <div class="tech-tile">Midjourney</div>
+      <div class="tech-tile">n8n</div>
+      <div class="tech-tile">Zapier</div>
+      <div class="tech-tile">Make</div>
+      <div class="tech-tile">Notion AI</div>
+      <div class="tech-tile">Perplexity</div>
+      <div class="tech-tile">Google Workspace</div>
+      <div class="tech-tile">Microsoft 365 Copilot</div>
+      <div class="tech-tile">AWS Bedrock</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="final-cta">
+  <div class="final-cta-glow" aria-hidden="true"></div>
+  <div class="container-sm reveal">
+    <h2>Candidate-se para a bolsa do MBA em <em>Inteligência Artificial</em> Aplicada</h2>
+    <a href="#" class="btn-gold lg">QUERO ME CANDIDATAR À BOLSA</a>
+    <p class="micro-copy">Leva 2 minutos · Nosso time avalia seu perfil em até 48h</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="logo"><span class="logo-dot"></span>Cerne</div>
+      <div class="footer-links">
+        <a href="#">Termos de Uso</a>
+        <a href="#">Política de Privacidade</a>
+        <span>CNPJ 00.000.000/0001-00</span>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>Este é um projeto de demonstração front-end (portfólio). "Cerne" e "Instituto Órbita" são marcas fictícias, criadas exclusivamente para fins de estudo e prática de desenvolvimento — não representam uma instituição de ensino real. Estatísticas exibidas nesta página são ilustrativas. Nenhum conteúdo aqui representa promessa de resultado individual, garantia de emprego ou de renda.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var header = document.getElementById('header');
+  window.addEventListener('scroll', function(){
+    header.classList.toggle('scrolled', window.scrollY > 24);
+  });
+
+  var revealEls = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(function(el){ io.observe(el); });
+</script>
+
+</body>
+</html>

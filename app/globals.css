@@ -1,26 +1,46 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-bg: #0B0E14;
+  --color-surface: #12161F;
+  --color-border: #232938;
+  --color-gold: #F2B705;
+  --color-violet: #6C63FF;
+  --color-ink: #F5F5F0;
+  --color-muted: #9AA0AC;
+  --color-green: #34D399;
+  --color-red: #F87171;
+
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-body: var(--font-plus-jakarta), sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), monospace;
+
+  --animate-marquee: marquee 28s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: #f2b705;
+  color: #0b0e14;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
