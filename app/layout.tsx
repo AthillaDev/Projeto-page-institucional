@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "Cerne — MBA em Inteligência Artificial Aplicada",
     description:
       "Diploma reconhecido, formação 100% prática e um arsenal de ferramentas de IA incluso.",
-    url: "https://seu-dominio.exemplo/",
+    url: "https://cerne-mba.vercel.app/",
     siteName: "Cerne",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     locale: "pt-BR",

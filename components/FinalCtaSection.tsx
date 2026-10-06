@@ -19,7 +19,7 @@ export default function FinalCtaSection() {
           <span className="italic text-gold">Inteligência Artificial</span> Aplicada
         </h2>
         <a
-          href="#"
+          href="#candidatura"
           className="inline-block rounded-full bg-gold px-10 py-4 font-display text-base font-bold text-bg transition-all hover:scale-[1.02] hover:bg-white sm:text-lg"
         >
           QUERO ME CANDIDATAR À BOLSA
