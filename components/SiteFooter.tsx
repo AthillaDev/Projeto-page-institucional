@@ -6,11 +6,12 @@ export default function SiteFooter() {
           <span className="h-2 w-2 rounded-full bg-gold" />
           <span className="font-display font-semibold">Cerne</span>
         </div>
-        <div className="flex flex-wrap justify-center gap-6 text-xs text-muted">
-          <a href="#" className="transition-colors hover:text-ink">Termos de Uso</a>
-          <a href="#" className="transition-colors hover:text-ink">Política de Privacidade</a>
+        <nav className="flex flex-wrap justify-center gap-6 text-xs text-muted" aria-label="Links importantes">
+          <a href="#" className="transition-colors hover:text-ink" aria-label="Termos de Uso">Termos de Uso</a>
+          <a href="#" className="transition-colors hover:text-ink" aria-label="Política de Privacidade">Política de Privacidade</a>
+          <a href="#" className="transition-colors hover:text-ink" aria-label="Contato">Contato</a>
           <span>CNPJ 00.000.000/0001-00</span>
-        </div>
+        </nav>
       </div>
 
       <div className="mx-auto mt-8 max-w-6xl border-t border-border/60 pt-8">
