@@ -7,23 +7,23 @@ const pillars = [
   {
     icon: BookOpen,
     tone: "gold",
-    title: "Diploma com nota máxima no MEC",
+    title: "Diploma de pós-graduação [inserir reconhecimento]",
     description:
-      "Reconhecimento oficial que abre porta em processo seletivo, promoção interna e negociação de salário.",
+      "[Inserir o ato regulatório e o conceito oficial do curso, conforme consta no e-MEC.]",
   },
   {
     icon: Users,
     tone: "violet",
-    title: "Metodologia validada por +30 mil alunos",
+    title: "Metodologia prática com [N] alunos",
     description:
-      "Não é teoria de sala de aula: é o mesmo caminho prático que já formou dezenas de milhares de profissionais.",
+      "Aulas focadas em aplicar IA no seu trabalho, sem exercícios artificiais. Inserir dado real antes de publicar.",
   },
   {
     icon: Sparkles,
     tone: "green",
-    title: "R$ 27 mil em ferramentas inclusas",
+    title: "Ferramentas de IA inclusas",
     description:
-      "Acesso ao Hub de Ferramentas Cerne — as principais IAs do mercado, sem custo extra, durante todo o curso.",
+      "Acesso às ferramentas listadas na seção Ferramentas durante o curso. Valores de referência, sujeitos à confirmação.",
   },
 ] as const
 

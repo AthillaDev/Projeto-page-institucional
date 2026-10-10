@@ -27,7 +27,6 @@ export default function SiteHeader() {
           <a href="#pilares" className="transition-colors hover:text-ink">Pilares</a>
           <a href="#metodologia" className="transition-colors hover:text-ink">Metodologia</a>
           <a href="#ferramentas" className="transition-colors hover:text-ink">Ferramentas</a>
-          <a href="#" className="transition-colors hover:text-ink">Área do Aluno</a>
         </nav>
 
         <a

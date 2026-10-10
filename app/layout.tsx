@@ -23,23 +23,26 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 })
 
+const siteUrl = "https://cerne-mba.vercel.app/"
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Cerne — MBA em Inteligência Artificial Aplicada",
   description:
-    "Diploma reconhecido, formação 100% prática e um arsenal de ferramentas de IA incluso — sem escrever uma linha de código.",
-  // Sugestão: ajustar os valores reais antes de publicar
+    "Formação prática em Inteligência Artificial Aplicada, com ferramentas de IA inclusas — sem escrever uma linha de código.",
+  // Exemplo fictício: substituir pelos dados reais da instituição antes de publicar
   openGraph: {
     title: "Cerne — MBA em Inteligência Artificial Aplicada",
     description:
-      "Diploma reconhecido, formação 100% prática e um arsenal de ferramentas de IA incluso.",
-    url: "https://cerne-mba.vercel.app/",
+      "Formação prática em Inteligência Artificial Aplicada, com ferramentas de IA inclusas.",
+    url: siteUrl,
     siteName: "Cerne",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     locale: "pt-BR",
     type: "website",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon-512.png",
     apple: "/apple-touch-icon.png",
   },
 }

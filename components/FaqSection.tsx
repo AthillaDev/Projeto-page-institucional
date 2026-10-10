@@ -13,22 +13,22 @@ const faqs = [
   {
     question: "O diploma é reconhecido pelo MEC?",
     answer:
-      "Sim. O curso possui reconhecimento do MEC com nota máxima, o que garante validade nacional do diploma.",
+      "[Inserir a resposta oficial sobre o reconhecimento do curso e do diploma, com o número do ato regulatório.]",
   },
   {
     question: "Quanto tempo dura o MBA?",
     answer:
-      "A formação tem duração de 12 meses, com encontros online e conteúdos gravados para você estudar no seu ritmo.",
+      "A formação tem duração de [X] meses, com encontros online e conteúdos gravados para você estudar no seu ritmo.",
   },
   {
     question: "As bolsas são limitadas?",
     answer:
-      "Sim. Temos um número limitado de bolsas com até 50% de desconto. A análise de perfil é feita em até 48 horas após a candidatura.",
+      "Sim. Há um número limitado de bolsas [N], com desconto de até [X]%. A análise de perfil é feita em até [prazo] após a candidatura.",
   },
   {
     question: "Quais ferramentas estão inclusas?",
     answer:
-      "Você recebe acesso a um pacote de ferramentas de IA avaliadas em mais de R$ 27 mil, incluindo soluções de produtividade, automação e geração de conteúdo.",
+      "Você recebe acesso às ferramentas de IA listadas na seção Ferramentas, incluindo soluções de produtividade, automação e análise de dados.",
   },
   {
     question: "Posso parcelar o investimento?",

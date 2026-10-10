@@ -14,21 +14,21 @@ const stats = [
     prefix: "+",
     suffix: "%",
     color: "text-gold",
-    description: "aumento médio salarial para profissionais com certificação em IA",
+    description: "[estatística a inserir, com fonte verificada]",
   },
   {
     value: 320,
     prefix: "+",
     suffix: "%",
     color: "text-violet",
-    description: "crescimento na demanda por profissionais de IA nos últimos 2 anos",
+    description: "[estatística a inserir, com fonte verificada]",
   },
   {
     value: 85,
     prefix: "",
     suffix: "%",
     color: "text-green",
-    description: "das empresas Fortune 500 já utilizam IA em suas operações",
+    description: "[estatística a inserir, com fonte verificada]",
   },
 ] as const
 
@@ -38,12 +38,8 @@ const container = {
 }
 
 /**
- * Fontes dos dados: 
- * - Pesquisa global sobre mercado de IA aplicada (2025)
- * - Relatório anual de tendências tecnológicas 
- * - Dados do LinkedIn Global Talent Report
- * 
- * *Nota: Valores atualizados com base em pesquisas recentes do mercado.*
+ * Valores ilustrativos. Antes de publicar, substituir por dados reais
+ * e indicar a fonte verificada de cada número (nome, instituição e ano).
  */
 export default function DataProofSection() {
   return (
@@ -56,9 +52,9 @@ export default function DataProofSection() {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <p className="mb-3 font-mono text-xs tracking-widest text-violet">DADOS, NÃO ACHISMO</p>
+          <p className="mb-3 font-mono text-xs tracking-widest text-violet">IA NO MERCADO</p>
           <h2 className="font-display text-3xl font-bold sm:text-4xl">
-            Não é achismo. É o que os dados mostram.
+            Números do mercado de IA
           </h2>
         </motion.div>
 
@@ -83,7 +79,7 @@ export default function DataProofSection() {
               />
               <p className="mb-3 text-sm text-ink/80">{description}</p>
               <p className="font-mono text-[11px] text-muted">
-                Fonte: relatório de tendências, 2025 (dado ilustrativo)
+                [Inserir fonte verificada] · dado ilustrativo
               </p>
             </motion.div>
           ))}
