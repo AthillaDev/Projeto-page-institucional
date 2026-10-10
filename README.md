@@ -1,44 +1,83 @@
-Nota: o aplicativo Next.js está dentro da pasta "cerne-mba/". Para iniciar localmente:
+# Cerne — Landing page de MBA em IA Aplicada
 
-  cd cerne-mba
-  npm install
-  npm run dev
+Landing page de uma instituição de ensino **fictícia** ("Cerne"), feita para prática de front-end e possível uso como modelo. Todos os nomes, dados, depoimentos e valores são ilustrativos e devem ser substituídos por informações reais antes de qualquer publicação.
 
-Certifique-se de usar Node.js 18+ (ou conforme definido em package.json -> engines).
+## Tecnologias
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+- [Next.js](https://nextjs.org) 16 (App Router) + React 19
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion (animações)
+- Lucide (ícones)
+- Fontes via `next/font/google`: Space Grotesk, Plus Jakarta Sans e IBM Plex Mono
 
-## Getting Started
+## Requisitos
 
-First, run the development server:
+- Node.js **20.9 ou superior** (exigido pelo Next 16)
+
+## Como rodar
 
 ```bash
+cd cerne-mba
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Comando         | Descrição                          |
+| --------------- | ---------------------------------- |
+| `npm run dev`   | Servidor de desenvolvimento        |
+| `npm run build` | Build de produção                  |
+| `npm run start` | Serve o build de produção          |
+| `npm run lint`  | Verifica o código com ESLint       |
 
-## Learn More
+## Variáveis de ambiente
 
-To learn more about Next.js, take a look at the following resources:
+Copie `.env.example` para `.env.local` e preencha:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variável                       | Descrição                                                                                 |
+| ------------------------------ | ----------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER`  | Número do WhatsApp que recebe as candidaturas (código do país + DDD + número, só dígitos). Sem ele, o formulário mostra "canal indisponível". |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Estrutura
 
-## Deploy on Vercel
+```
+app/
+  layout.tsx        metadados, fontes e HTML base
+  page.tsx          composição das seções da home
+  globals.css       tokens de cor e fonte (@theme do Tailwind)
+  termos/           Termos de Uso (modelo)
+  privacidade/      Política de Privacidade (modelo)
+components/         uma seção por arquivo (Hero, Pillars, Pricing, FAQ, formulário...)
+src/lib/            utilitários (easing)
+public/             imagens, ícone e og-image
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+As seções da home, na ordem em que aparecem: Hero, Pilares, Problema/Solução, Metodologia, Prova de dados, Ferramentas, Depoimentos, Investimento, FAQ, Formulário de candidatura e CTA final.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Antes de publicar
+
+Os seguintes pontos estão marcados com `[...]` no código e precisam ser preenchidos ou revisados:
+
+- Reconhecimento oficial do curso e do diploma (com número do ato regulatório, conforme e-MEC)
+- Número de alunos, bolsas, percentuais de desconto e prazos de análise
+- Preços e valores de referência das ferramentas inclusas
+- Estatísticas de mercado, com fonte verificada para cada número
+- Depoimentos reais, com autorização por escrito
+- Razão social, CNPJ e contato do encarregado nas páginas legais
+- Revisão jurídica de **Termos de Uso** e **Política de Privacidade**, que são apenas modelos
+
+## Deploy
+
+O projeto é compatível com a Vercel. A URL de referência nos metadados está em `app/layout.tsx` (`siteUrl`) e deve ser ajustada para o domínio final.
+
+## CI
+
+O workflow em `.github/workflows/ci.yml` roda `npm ci`, `npm run build` e `npm run lint` a cada push e pull request, com Node 20.
+
+## Notas para quem edita
+
+Este projeto usa uma versão do Next.js com mudanças em relação a versões anteriores. Consulte a documentação incluída em `node_modules/next/dist/docs/` antes de alterar APIs, conforme descrito em [AGENTS.md](AGENTS.md).
