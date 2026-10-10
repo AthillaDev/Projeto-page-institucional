@@ -49,7 +49,7 @@ export default function PricingSection() {
 
           <div className="mb-10 space-y-3 text-left max-w-sm mx-auto">
             {[
-              "Diploma reconhecido pelo MEC",
+              "Diploma de pós-graduação [inserir reconhecimento]",
               "Formação 100% prática",
               "Acesso a ferramentas de IA",
               "Suporte e mentoria",
@@ -72,7 +72,12 @@ export default function PricingSection() {
           </a>
 
           <p className="mt-4 text-sm text-muted">
-            Vagas limitadas. Análise de perfil em até 48 horas.
+            Vagas limitadas. Análise de perfil em até [prazo].
+          </p>
+
+          <p className="mt-6 text-xs text-muted/70">
+            Valores de exemplo. Antes de publicar, substitua pelos preços reais. O preço &ldquo;de&rdquo; só pode
+            aparecer se o valor original tiver sido praticado.
           </p>
         </motion.div>
       </div>

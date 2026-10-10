@@ -3,6 +3,9 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 
+// Número de WhatsApp da instituição, definido em .env.local (ver .env.example)
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? ""
+
 export default function ApplicationFormSection() {
   const [formData, setFormData] = useState({
     name: "",
@@ -10,6 +13,8 @@ export default function ApplicationFormSection() {
     whatsapp: "",
     role: "",
   })
+  const [consent, setConsent] = useState(false)
+  const [error, setError] = useState("")
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -18,6 +23,12 @@ export default function ApplicationFormSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
+    if (!WHATSAPP_NUMBER) {
+      setError("Canal de contato indisponível no momento. Tente novamente mais tarde.")
+      return
+    }
+
+    setError("")
     const message = `Olá! Quero me candidatar à bolsa do MBA em IA Aplicada.
 
 Nome: ${formData.name}
@@ -26,8 +37,7 @@ WhatsApp: ${formData.whatsapp}
 Cargo atual: ${formData.role}`
 
     const encodedMessage = encodeURIComponent(message)
-    const phone = "5521970431587" // Substitua pelo número real da instituição se quiser
-    window.open(`https://wa.me/${phone}?text=${encodedMessage}`, "_blank")
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, "_blank")
   }
 
   return (
@@ -44,7 +54,7 @@ Cargo atual: ${formData.role}`
             Candidate-se à bolsa
           </h2>
           <p className="text-muted text-lg">
-            Preencha os dados abaixo. Nosso time analisa seu perfil em até 48h.
+            Preencha os dados abaixo. A análise do seu perfil é feita em até [prazo].
           </p>
         </motion.div>
 
@@ -120,15 +130,35 @@ Cargo atual: ${formData.role}`
             />
           </div>
 
+          <label htmlFor="consent" className="flex items-start gap-3 text-xs leading-relaxed text-muted">
+            <input
+              type="checkbox"
+              id="consent"
+              name="consent"
+              required
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              className="mt-0.5 h-4 w-4 shrink-0 accent-gold"
+            />
+            <span>
+              Concordo que a instituição use meus dados (nome, e-mail, WhatsApp e cargo) apenas para
+              entrar em contato sobre minha candidatura, conforme a{" "}
+              <a href="/privacidade" className="text-gold hover:underline">Política de Privacidade</a>.
+            </span>
+          </label>
+
+          {error && <p role="alert" className="text-center text-sm text-red">{error}</p>}
+
           <button
             type="submit"
-            className="w-full rounded-full bg-gold px-8 py-4 font-display text-base font-bold text-bg transition-all hover:scale-[1.02] hover:bg-white"
+            disabled={!consent}
+            className="w-full rounded-full bg-gold px-8 py-4 font-display text-base font-bold text-bg transition-all hover:scale-[1.02] hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gold"
           >
             ENVIAR CANDIDATURA
           </button>
 
           <p className="text-center text-xs text-muted">
-            Seus dados estão seguros. Não enviamos spam.
+            Não enviamos spam. Você pode pedir a exclusão dos seus dados a qualquer momento.
           </p>
         </motion.form>
       </div>

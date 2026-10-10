@@ -25,7 +25,7 @@ export default function FinalCtaSection() {
           QUERO ME CANDIDATAR À BOLSA
         </a>
         <p className="mt-4 font-mono text-xs text-muted">
-          Leva 2 minutos · Nosso time avalia seu perfil em até 48h
+          Leva 2 minutos · Análise do seu perfil em até [prazo]
         </p>
       </motion.div>
     </section>

@@ -31,7 +31,7 @@ export default function HeroSection() {
             className="mb-8 inline-flex items-center gap-2 rounded-full border border-gold/25 bg-gold/10 px-4 py-1.5 font-mono text-xs tracking-widest text-gold"
           >
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
-            50 BOLSAS LIBERADAS · ATÉ 50% DE DESCONTO
+            [N] BOLSAS LIBERADAS · ATÉ [X]% DE DESCONTO
           </motion.div>
 
           <motion.h1
@@ -50,8 +50,8 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto mb-10 max-w-2xl text-lg text-muted lg:mx-0 lg:text-xl"
           >
-            Diploma reconhecido, formação 100% prática e um arsenal de ferramentas de IA
-            incluso — sem escrever uma linha de código.
+            Formação prática em Inteligência Artificial Aplicada, com ferramentas de IA
+            inclusas — sem escrever uma linha de código.
           </motion.p>
 
           <motion.ul
@@ -61,9 +61,9 @@ export default function HeroSection() {
             className="mb-10 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm lg:justify-start"
           >
             {[
-              "Reconhecimento MEC nota máxima",
-              "Metodologia validada por +30 mil alunos",
-              "R$ 27 mil em ferramentas inclusas",
+              "[Reconhecimento oficial: inserir dado real]",
+              "[N] alunos formados: inserir dado real",
+              "Ferramentas de IA inclusas no curso",
             ].map((entry) => (
               <li key={entry} className="flex items-center gap-2 text-ink/90">
                 <Check className="h-4 w-4 shrink-0 text-gold" strokeWidth={2.5} />
@@ -84,7 +84,7 @@ export default function HeroSection() {
               QUERO ME CANDIDATAR À BOLSA
             </a>
             <p className="mt-4 font-mono text-xs text-muted">
-              Leva 2 minutos · Nosso time avalia seu perfil em até 48h
+              Leva 2 minutos · Análise do seu perfil em até [prazo]
             </p>
           </motion.div>
         </div>

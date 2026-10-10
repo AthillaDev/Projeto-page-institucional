@@ -2,30 +2,22 @@
 
 import { motion } from "framer-motion"
 
-const logos = [
-  "Nubank",
-  "iFood",
-  "Magazine Luiza",
-  "Stone",
-  "Ambev",
-  "Totvs",
-]
-
+// Depoimentos de exemplo: substituir por depoimentos reais, com autorização por escrito
 const testimonials = [
   {
-    name: "Ana Paula Mendes",
-    role: "Gerente de Produto · Fintech",
-    text: "O MBA me deu clareza para aplicar IA no dia a dia sem depender de time técnico. Em 3 meses já estava automatizando processos que antes levavam semanas.",
+    name: "[Nome do aluno]",
+    role: "[Cargo · Empresa]",
+    text: "[Depoimento real do aluno, com autorização para publicação.]",
   },
   {
-    name: "Ricardo Almeida",
-    role: "Coordenador de Marketing · Varejo",
-    text: "A metodologia é extremamente prática. Saí com um portfólio real de projetos e hoje lidero iniciativas de IA na empresa.",
+    name: "[Nome do aluno]",
+    role: "[Cargo · Empresa]",
+    text: "[Depoimento real do aluno, com autorização para publicação.]",
   },
   {
-    name: "Juliana Costa",
-    role: "Empreendedora · SaaS",
-    text: "As ferramentas inclusas sozinhas já valem o investimento. Consegui estruturar meu produto com muito mais velocidade e inteligência.",
+    name: "[Nome do aluno]",
+    role: "[Cargo · Empresa]",
+    text: "[Depoimento real do aluno, com autorização para publicação.]",
   },
 ]
 
@@ -42,34 +34,11 @@ export default function TestimonialsSection() {
           className="mb-16 text-center"
         >
           <h2 className="font-display text-3xl font-bold sm:text-4xl mb-4">
-            Quem já está aplicando IA na prática
+            Depoimentos de alunos
           </h2>
           <p className="text-muted text-lg max-w-2xl mx-auto">
-            Profissionais de diferentes áreas que transformaram sua carreira com o MBA.
+            Espaço para depoimentos reais, publicados somente com autorização dos alunos.
           </p>
-        </motion.div>
-
-        {/* Logos */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-20"
-        >
-          <p className="mb-8 text-center font-mono text-xs tracking-widest text-muted">
-            ALUNOS QUE TRABALHAM EM
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-            {logos.map((logo) => (
-              <span
-                key={logo}
-                className="text-lg font-semibold text-muted/70 transition hover:text-ink"
-              >
-                {logo}
-              </span>
-            ))}
-          </div>
         </motion.div>
 
         {/* Depoimentos */}
