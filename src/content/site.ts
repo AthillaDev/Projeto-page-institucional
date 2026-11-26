@@ -5,7 +5,7 @@
 
 export const site = {
   name: "Cerne",
-  url: "https://cerne-mba.vercel.app",
+  url: "https://projeto-page-institucional.vercel.app",
   locale: "pt-BR",
   title: "Cerne — MBA em Inteligência Artificial Aplicada",
   description:
