@@ -2,15 +2,9 @@
 
 import { motion } from "framer-motion"
 import AnimatedNumber from "./AnimatedNumber"
+import { tools } from "@/src/content/site"
 
-// Valores de referência (exemplo): substituir pelos valores reais antes de publicar
-const categories = [
-  { name: "Criação & Produtividade", items: "ChatGPT Plus · Claude Pro · Notion AI", value: 3600 },
-  { name: "Automação", items: "n8n Cloud · Zapier Pro · Make", value: 4800 },
-  { name: "Dados & Análise", items: "Julius AI · Perplexity Pro", value: 2400 },
-] as const
-
-const TOTAL_VALUE = categories.reduce((sum, { value }) => sum + value, 0)
+const TOTAL_VALUE = tools.categories.reduce((sum, { value }) => sum + value, 0)
 
 export default function ToolsBonusSection() {
   return (
@@ -23,17 +17,13 @@ export default function ToolsBonusSection() {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <p className="mb-3 font-mono text-xs tracking-widest text-gold">HUB DE FERRAMENTAS CERNE</p>
-          <h2 className="font-display text-3xl font-bold sm:text-4xl">
-            Ferramentas de IA incluídas no curso
-          </h2>
-          <p className="mx-auto mt-3 max-w-md text-sm text-muted">
-            Valores de referência, sujeitos à confirmação.
-          </p>
+          <p className="mb-3 font-mono text-xs tracking-widest text-gold">{tools.eyebrow}</p>
+          <h2 className="font-display text-3xl font-bold sm:text-4xl">{tools.title}</h2>
+          <p className="mx-auto mt-3 max-w-md text-sm text-muted">{tools.subtitle}</p>
         </motion.div>
 
         <div className="mb-8 space-y-3">
-          {categories.map(({ name, items, value }, i) => (
+          {tools.categories.map(({ name, items, value }, i) => (
             <motion.div
               key={name}
               initial={{ opacity: 0, y: 16 }}
@@ -58,9 +48,9 @@ export default function ToolsBonusSection() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5 }}
-          className="rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/15 to-violet/15 p-8 text-center"
+          className="rounded-2xl border border-gold/30 bg-linear-to-br from-gold/15 to-violet/15 p-8 text-center"
         >
-          <p className="mb-2 font-mono text-xs tracking-widest text-muted">VALOR DE REFERÊNCIA POR ANO</p>
+          <p className="mb-2 font-mono text-xs tracking-widest text-muted">{tools.totalLabel}</p>
           <AnimatedNumber
             value={TOTAL_VALUE}
             prefix="R$ "

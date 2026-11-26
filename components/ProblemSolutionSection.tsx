@@ -3,9 +3,9 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
 import { Check } from "lucide-react"
+import { problemSolution } from "@/src/content/site"
 
-const oldWays = ["Planilhas manuais", "Tarefas repetitivas", "Retrabalho constante", "Decisões no achismo"]
-const newWays = ["Agentes de IA", "Automações inteligentes", "Análise preditiva", "Decisões orientadas por dado"]
+const { oldWays, newWays } = problemSolution
 
 /** Um item que "acende" (ganha opacidade/cor plena) conforme o scroll avança pela faixa que lhe cabe. */
 function ScrollLitItem({
@@ -44,18 +44,13 @@ export default function ProblemSolutionSection() {
           className="mb-4 text-center"
         >
           <h2 className="mx-auto mb-6 max-w-2xl text-balance font-display text-3xl font-bold leading-tight sm:text-4xl">
-            A IA já está decidindo quem sobe e quem fica pra trás.
+            {problemSolution.title}
           </h2>
-          <p className="mx-auto max-w-2xl leading-relaxed text-muted">
-            O mercado não está esperando ninguém se atualizar no próprio ritmo. Times inteiros já
-            trocaram planilha manual por agente de IA, e quem ainda opera do jeito antigo vira, aos
-            poucos, o gargalo do próprio time. Quem se posiciona agora sai na frente — não daqui a
-            dois anos, quando isso for óbvio pra todo mundo.
-          </p>
+          <p className="mx-auto max-w-2xl leading-relaxed text-muted">{problemSolution.body}</p>
         </motion.div>
 
         <p className="mb-10 text-center font-mono text-xs tracking-widest text-muted">
-          role a página — o mercado acende o que importa
+          {problemSolution.hint}
         </p>
 
         <div ref={sectionRef} className="grid gap-4 sm:grid-cols-2">

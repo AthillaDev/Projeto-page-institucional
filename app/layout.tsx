@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Space_Grotesk, Plus_Jakarta_Sans, IBM_Plex_Mono } from "next/font/google"
 import "./globals.css"
+import { site } from "@/src/content/site"
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -23,20 +24,15 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 })
 
-const siteUrl = "https://cerne-mba.vercel.app/"
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: "Cerne — MBA em Inteligência Artificial Aplicada",
-  description:
-    "Formação prática em Inteligência Artificial Aplicada, com ferramentas de IA inclusas — sem escrever uma linha de código.",
-  // Exemplo fictício: substituir pelos dados reais da instituição antes de publicar
+  metadataBase: new URL(site.url),
+  title: site.title,
+  description: site.description,
   openGraph: {
-    title: "Cerne — MBA em Inteligência Artificial Aplicada",
-    description:
-      "Formação prática em Inteligência Artificial Aplicada, com ferramentas de IA inclusas.",
-    url: siteUrl,
-    siteName: "Cerne",
+    title: site.title,
+    description: site.description,
+    url: site.url,
+    siteName: site.name,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     locale: "pt-BR",
     type: "website",

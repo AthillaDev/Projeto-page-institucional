@@ -3,6 +3,7 @@
 import { motion, type Variants } from "framer-motion"
 import { Check } from "lucide-react"
 import CoreNetwork from "./CoreNetwork"
+import { hero } from "@/src/content/site"
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -14,9 +15,9 @@ export default function HeroSection() {
     <section className="relative overflow-hidden pt-40 pb-24 px-6 lg:px-10">
       {/* fundo: brilhos e linhas sutis */}
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-60">
-        <div className="absolute top-1/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-        <div className="absolute top-2/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-        <div className="absolute top-3/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        <div className="absolute top-1/4 left-0 right-0 h-px bg-linear-to-r from-transparent via-border to-transparent" />
+        <div className="absolute top-2/4 left-0 right-0 h-px bg-linear-to-r from-transparent via-border to-transparent" />
+        <div className="absolute top-3/4 left-0 right-0 h-px bg-linear-to-r from-transparent via-border to-transparent" />
       </div>
       <div className="pointer-events-none absolute -top-40 right-0 -z-10 h-[600px] w-[600px] rounded-full bg-violet/20 blur-[140px]" />
       <div className="pointer-events-none absolute -top-20 left-0 -z-10 h-[400px] w-[400px] rounded-full bg-gold/10 blur-[120px]" />
@@ -31,7 +32,7 @@ export default function HeroSection() {
             className="mb-8 inline-flex items-center gap-2 rounded-full border border-gold/25 bg-gold/10 px-4 py-1.5 font-mono text-xs tracking-widest text-gold"
           >
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
-            [N] BOLSAS LIBERADAS · ATÉ [X]% DE DESCONTO
+            {hero.badge.toUpperCase()}
           </motion.div>
 
           <motion.h1
@@ -40,8 +41,8 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-6 text-balance font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl"
           >
-            Candidate-se para a bolsa do MBA em{" "}
-            <span className="italic text-gold">Inteligência Artificial</span> Aplicada
+            {hero.titleStart}{" "}
+            <span className="italic text-gold">{hero.titleHighlight}</span> {hero.titleEnd}
           </motion.h1>
 
           <motion.p
@@ -50,8 +51,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto mb-10 max-w-2xl text-lg text-muted lg:mx-0 lg:text-xl"
           >
-            Formação prática em Inteligência Artificial Aplicada, com ferramentas de IA
-            inclusas — sem escrever uma linha de código.
+            {hero.subtitle}
           </motion.p>
 
           <motion.ul
@@ -60,11 +60,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mb-10 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm lg:justify-start"
           >
-            {[
-              "[Reconhecimento oficial: inserir dado real]",
-              "[N] alunos formados: inserir dado real",
-              "Ferramentas de IA inclusas no curso",
-            ].map((entry) => (
+            {hero.proofs.map((entry) => (
               <li key={entry} className="flex items-center gap-2 text-ink/90">
                 <Check className="h-4 w-4 shrink-0 text-gold" strokeWidth={2.5} />
                 {entry}
@@ -81,11 +77,9 @@ export default function HeroSection() {
               href="#candidatura"
               className="inline-block rounded-full bg-gold px-10 py-4 font-display text-base font-bold text-bg shadow-[0_0_40px_rgba(242,183,5,0.25)] transition-all hover:scale-[1.02] hover:bg-white sm:text-lg"
             >
-              QUERO ME CANDIDATAR À BOLSA
+              {hero.ctaLabel}
             </a>
-            <p className="mt-4 font-mono text-xs text-muted">
-              Leva 2 minutos · Análise do seu perfil em até [prazo]
-            </p>
+            <p className="mt-4 font-mono text-xs text-muted">{hero.ctaNote}</p>
           </motion.div>
         </div>
 
@@ -108,22 +102,18 @@ export default function HeroSection() {
         variants={fadeUp}
         className="mt-20"
       >
-        <p className="mb-6 text-center font-mono text-xs tracking-widest text-muted">
-          FERRAMENTAS QUE VOCÊ VAI DOMINAR
-        </p>
+        <p className="mb-6 text-center font-mono text-xs tracking-widest text-muted">{hero.toolsTitle}</p>
         <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
           <div className="flex w-max animate-marquee gap-4">
             {[...Array(2)].map((_, dup) =>
-              ["ChatGPT", "Claude", "Gemini", "Midjourney", "n8n", "Zapier", "Notion AI", "Perplexity"].map(
-                (tool) => (
-                  <span
-                    key={`${tool}-${dup}`}
-                    className="whitespace-nowrap rounded-full border border-border px-5 py-2 font-mono text-sm text-muted"
-                  >
-                    {tool}
-                  </span>
-                )
-              )
+              hero.tools.map((tool) => (
+                <span
+                  key={`${tool}-${dup}`}
+                  className="whitespace-nowrap rounded-full border border-border px-5 py-2 font-mono text-sm text-muted"
+                >
+                  {tool}
+                </span>
+              ))
             )}
           </div>
         </div>

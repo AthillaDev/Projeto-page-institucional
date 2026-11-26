@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { finalCta } from "@/src/content/site"
 
 export default function FinalCtaSection() {
   return (
@@ -15,18 +16,16 @@ export default function FinalCtaSection() {
         className="mx-auto max-w-2xl"
       >
         <h2 className="mb-6 font-display text-3xl font-bold sm:text-4xl">
-          Candidate-se para a bolsa do MBA em{" "}
-          <span className="italic text-gold">Inteligência Artificial</span> Aplicada
+          {finalCta.titleStart}{" "}
+          <span className="italic text-gold">{finalCta.titleHighlight}</span> {finalCta.titleEnd}
         </h2>
         <a
           href="#candidatura"
           className="inline-block rounded-full bg-gold px-10 py-4 font-display text-base font-bold text-bg transition-all hover:scale-[1.02] hover:bg-white sm:text-lg"
         >
-          QUERO ME CANDIDATAR À BOLSA
+          {finalCta.ctaLabel}
         </a>
-        <p className="mt-4 font-mono text-xs text-muted">
-          Leva 2 minutos · Análise do seu perfil em até [prazo]
-        </p>
+        <p className="mt-4 font-mono text-xs text-muted">{finalCta.note}</p>
       </motion.div>
     </section>
   )

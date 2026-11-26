@@ -3,39 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown } from "lucide-react"
-
-const faqs = [
-  {
-    question: "Preciso saber programar para fazer o MBA?",
-    answer:
-      "Não. O MBA é focado em aplicação prática de Inteligência Artificial sem necessidade de escrever código. Você vai aprender a usar ferramentas avançadas de forma estratégica.",
-  },
-  {
-    question: "O diploma é reconhecido pelo MEC?",
-    answer:
-      "[Inserir a resposta oficial sobre o reconhecimento do curso e do diploma, com o número do ato regulatório.]",
-  },
-  {
-    question: "Quanto tempo dura o MBA?",
-    answer:
-      "A formação tem duração de [X] meses, com encontros online e conteúdos gravados para você estudar no seu ritmo.",
-  },
-  {
-    question: "As bolsas são limitadas?",
-    answer:
-      "Sim. Há um número limitado de bolsas [N], com desconto de até [X]%. A análise de perfil é feita em até [prazo] após a candidatura.",
-  },
-  {
-    question: "Quais ferramentas estão inclusas?",
-    answer:
-      "Você recebe acesso às ferramentas de IA listadas na seção Ferramentas, incluindo soluções de produtividade, automação e análise de dados.",
-  },
-  {
-    question: "Posso parcelar o investimento?",
-    answer:
-      "Sim. Oferecemos opções de parcelamento. Os detalhes são apresentados após a análise da sua candidatura.",
-  },
-]
+import { faq as faqs } from "@/src/content/site"
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -73,7 +41,10 @@ export default function FaqSection() {
               className="rounded-2xl border border-border overflow-hidden"
             >
               <button
+                type="button"
                 onClick={() => toggle(index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-panel-${index}`}
                 className="flex w-full items-center justify-between px-6 py-5 text-left transition hover:bg-white/5"
               >
                 <span className="font-medium pr-4">{faq.question}</span>
@@ -87,6 +58,7 @@ export default function FaqSection() {
               <AnimatePresence>
                 {openIndex === index && (
                   <motion.div
+                    id={`faq-panel-${index}`}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
