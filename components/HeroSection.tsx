@@ -1,5 +1,6 @@
 "use client"
 
+import { useSyncExternalStore } from "react"
 import { motion, type Variants } from "framer-motion"
 import { Check } from "lucide-react"
 import CoreNetwork from "./CoreNetwork"
@@ -10,7 +11,26 @@ const fadeUp: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 }
 
+const DESKTOP_QUERY = "(min-width: 1024px)"
+
+function subscribeDesktop(onChange: () => void) {
+  const mq = window.matchMedia(DESKTOP_QUERY)
+  mq.addEventListener("change", onChange)
+  return () => mq.removeEventListener("change", onChange)
+}
+
+/** true apenas em telas grandes. No servidor e na hidratação inicial, retorna false. */
+function useIsDesktop(): boolean {
+  return useSyncExternalStore(
+    subscribeDesktop,
+    () => window.matchMedia(DESKTOP_QUERY).matches,
+    () => false
+  )
+}
+
 export default function HeroSection() {
+  const isDesktop = useIsDesktop()
+
   return (
     <section className="relative overflow-hidden pt-40 pb-24 px-6 lg:px-10">
       {/* fundo: brilhos e linhas sutis */}
@@ -86,7 +106,12 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="hidden lg:block"
         >
-          <CoreNetwork />
+          {/* O diagrama só é montado em telas grandes: no celular ele não roda animações. */}
+          {isDesktop ? (
+            <CoreNetwork />
+          ) : (
+            <div aria-hidden="true" className="mx-auto aspect-square w-full max-w-[440px]" />
+          )}
         </motion.div>
       </div>
 
