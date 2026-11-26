@@ -7,23 +7,35 @@ import { problemSolution } from "@/src/content/site"
 
 const { oldWays, newWays } = problemSolution
 
-/** Um item que "acende" (ganha opacidade/cor plena) conforme o scroll avança pela faixa que lhe cabe. */
+/**
+ * Um item que "acende" conforme o scroll avança. Só o marcador (ícone ou bolinha) muda de opacidade;
+ * o texto fica sempre com contraste total, para não ficar ilegível enquanto o item está apagado.
+ */
 function ScrollLitItem({
   progress,
   index,
   total,
-  children,
+  marker,
+  label,
 }: {
   progress: MotionValue<number>
   index: number
   total: number
-  children: React.ReactNode
+  marker: React.ReactNode
+  label: React.ReactNode
 }) {
   const start = index / total
   const end = (index + 1) / total
   const opacity = useTransform(progress, [start, end], [0.35, 1])
 
-  return <motion.li style={{ opacity }} className="flex items-center gap-3">{children}</motion.li>
+  return (
+    <li className="flex items-center gap-3">
+      <motion.span style={{ opacity }} className="flex shrink-0 items-center">
+        {marker}
+      </motion.span>
+      {label}
+    </li>
+  )
 }
 
 export default function ProblemSolutionSection() {
@@ -58,10 +70,14 @@ export default function ProblemSolutionSection() {
             <p className="mb-5 font-mono text-xs tracking-widest text-red">MODO ANTIGO</p>
             <ul className="space-y-3 text-sm">
               {oldWays.map((label, i) => (
-                <ScrollLitItem key={label} progress={scrollYProgress} index={i} total={oldWays.length}>
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-red/50" />
-                  <span className="text-muted line-through decoration-red/50">{label}</span>
-                </ScrollLitItem>
+                <ScrollLitItem
+                  key={label}
+                  progress={scrollYProgress}
+                  index={i}
+                  total={oldWays.length}
+                  marker={<span className="h-1.5 w-1.5 rounded-full bg-red/50" />}
+                  label={<span className="text-muted line-through decoration-red/50">{label}</span>}
+                />
               ))}
             </ul>
           </div>
@@ -70,10 +86,14 @@ export default function ProblemSolutionSection() {
             <p className="mb-5 font-mono text-xs tracking-widest text-green">MODO CERNE</p>
             <ul className="space-y-3 text-sm">
               {newWays.map((label, i) => (
-                <ScrollLitItem key={label} progress={scrollYProgress} index={i} total={newWays.length}>
-                  <Check className="h-4 w-4 shrink-0 text-green" strokeWidth={2.5} />
-                  <span className="text-ink/90">{label}</span>
-                </ScrollLitItem>
+                <ScrollLitItem
+                  key={label}
+                  progress={scrollYProgress}
+                  index={i}
+                  total={newWays.length}
+                  marker={<Check className="h-4 w-4 text-green" strokeWidth={2.5} />}
+                  label={<span className="text-ink/90">{label}</span>}
+                />
               ))}
             </ul>
           </div>
