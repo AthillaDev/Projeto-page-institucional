@@ -106,11 +106,11 @@ jspm_packages/
 .temp/
 .tmp/
 
-# Test files
+# Test files (ignora testes gerados/temporários; os testes do projeto em src/ são versionados)
 *.test.js
-*.test.ts
 *.test.jsx
 *.test.tsx
+!src/**/*.test.ts
 
 # Coverage reports
 coverage/

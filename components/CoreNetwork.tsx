@@ -70,7 +70,7 @@ export default function CoreNetwork() {
                 <motion.circle
                   r={3}
                   fill={color}
-                  initial={{ opacity: 0 }}
+                  initial={{ opacity: 0, cx: 0, cy: 0 }}
                   animate={{ cx: [0, x], cy: [0, y], opacity: [0, 1, 1, 0] }}
                   transition={{
                     duration: 2.2,

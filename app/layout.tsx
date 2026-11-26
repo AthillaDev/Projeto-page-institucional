@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Space_Grotesk, Plus_Jakarta_Sans, IBM_Plex_Mono } from "next/font/google"
 import "./globals.css"
+import { site } from "@/src/content/site"
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -24,22 +25,20 @@ const ibmPlexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Cerne — MBA em Inteligência Artificial Aplicada",
-  description:
-    "Diploma reconhecido, formação 100% prática e um arsenal de ferramentas de IA incluso — sem escrever uma linha de código.",
-  // Sugestão: ajustar os valores reais antes de publicar
+  metadataBase: new URL(site.url),
+  title: site.title,
+  description: site.description,
   openGraph: {
-    title: "Cerne — MBA em Inteligência Artificial Aplicada",
-    description:
-      "Diploma reconhecido, formação 100% prática e um arsenal de ferramentas de IA incluso.",
-    url: "https://cerne-mba.vercel.app/",
-    siteName: "Cerne",
+    title: site.title,
+    description: site.description,
+    url: site.url,
+    siteName: site.name,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     locale: "pt-BR",
     type: "website",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon-512.png",
     apple: "/apple-touch-icon.png",
   },
 }

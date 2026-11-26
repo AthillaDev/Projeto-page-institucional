@@ -32,6 +32,13 @@ html {
   color: #0b0e14;
 }
 
+/* Foco visível e consistente para navegação por teclado (botões, links, campos, FAQ). */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
