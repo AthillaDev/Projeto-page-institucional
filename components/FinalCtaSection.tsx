@@ -1,20 +1,12 @@
-"use client"
-
-import { motion } from "framer-motion"
 import { finalCta } from "@/src/content/site"
+import Reveal from "./Reveal"
 
 export default function FinalCtaSection() {
   return (
     <section className="relative overflow-hidden border-t border-border px-6 py-28 text-center lg:px-10">
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[400px] w-[700px] -translate-x-1/2 rounded-full bg-gold/10 blur-[140px]" />
 
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.6 }}
-        className="mx-auto max-w-2xl"
-      >
+      <Reveal amount={0.5} className="mx-auto max-w-2xl">
         <h2 className="mb-6 font-display text-3xl font-bold sm:text-4xl">
           {finalCta.titleStart}{" "}
           <span className="italic text-gold">{finalCta.titleHighlight}</span> {finalCta.titleEnd}
@@ -26,7 +18,7 @@ export default function FinalCtaSection() {
           {finalCta.ctaLabel}
         </a>
         <p className="mt-4 font-mono text-xs text-muted">{finalCta.note}</p>
-      </motion.div>
+      </Reveal>
     </section>
   )
 }

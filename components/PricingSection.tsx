@@ -1,30 +1,17 @@
-"use client"
-
-import { motion } from "framer-motion"
 import { Check } from "lucide-react"
 import { pricing } from "@/src/content/site"
+import Reveal from "./Reveal"
 
 export default function PricingSection() {
   return (
     <section id="investimento" className="border-t border-border px-6 py-24 lg:px-10">
       <div className="mx-auto max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
+        <Reveal className="mb-16 text-center">
           <h2 className="font-display text-3xl font-bold sm:text-4xl mb-4">{pricing.title}</h2>
           <p className="text-muted text-lg max-w-2xl mx-auto">{pricing.subtitle}</p>
-        </motion.div>
+        </Reveal>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mx-auto max-w-xl rounded-3xl border border-gold/30 bg-linear-to-b from-gold/10 to-transparent p-8 sm:p-10 text-center shadow-[0_0_40px_rgba(242,183,5,0.08)]"
+        <Reveal delay={0.1} className="mx-auto max-w-xl rounded-3xl border border-gold/30 bg-linear-to-b from-gold/10 to-transparent p-8 sm:p-10 text-center shadow-[0_0_40px_rgba(242,183,5,0.08)]"
         >
           <p className="mb-2 font-mono text-xs tracking-widest text-gold">{pricing.label}</p>
 
@@ -63,7 +50,7 @@ export default function PricingSection() {
           <p className="mt-4 text-sm text-muted">{pricing.note}</p>
 
           <p className="mt-6 text-xs text-muted/70">{pricing.disclaimer}</p>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )
