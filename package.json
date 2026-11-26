@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "22.20.7",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^8.67.0",
@@ -30,7 +30,7 @@
     "prettier": "^3.9.6",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "3.2.7"
+    "vitest": "5.1.2"
   },
   "engines": {
     "node": ">=20.9.0"
