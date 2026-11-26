@@ -1,77 +1,37 @@
-"use client"
-
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown } from "lucide-react"
 import { faq as faqs } from "@/src/content/site"
+import Reveal from "./Reveal"
 
+/**
+ * Acordeão feito com <details>/<summary>: abre e fecha no navegador sem JavaScript,
+ * com suporte nativo a teclado e leitores de tela. O atributo `name` faz com que
+ * apenas um item fique aberto por vez, quando o navegador oferece suporte.
+ */
 export default function FaqSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
-
-  const toggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index)
-  }
-
   return (
     <section id="faq" className="border-t border-border px-6 py-24 lg:px-10">
       <div className="mx-auto max-w-3xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-14 text-center"
-        >
-          <h2 className="font-display text-3xl font-bold sm:text-4xl mb-4">
-            Perguntas frequentes
-          </h2>
-          <p className="text-muted text-lg">
-            Tire suas principais dúvidas antes de se candidatar.
-          </p>
-        </motion.div>
+        <Reveal className="mb-14 text-center">
+          <h2 className="font-display text-3xl font-bold sm:text-4xl mb-4">Perguntas frequentes</h2>
+          <p className="text-muted text-lg">Tire suas principais dúvidas antes de se candidatar.</p>
+        </Reveal>
 
         <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="rounded-2xl border border-border overflow-hidden"
+          {faqs.map((faq) => (
+            <details
+              key={faq.question}
+              name="faq"
+              className="group overflow-hidden rounded-2xl border border-border"
             >
-              <button
-                type="button"
-                onClick={() => toggle(index)}
-                aria-expanded={openIndex === index}
-                aria-controls={`faq-panel-${index}`}
-                className="flex w-full items-center justify-between px-6 py-5 text-left transition hover:bg-white/5"
-              >
-                <span className="font-medium pr-4">{faq.question}</span>
+              <summary className="flex w-full cursor-pointer list-none items-center justify-between px-6 py-5 text-left transition hover:bg-white/5 [&::-webkit-details-marker]:hidden">
+                <span className="pr-4 font-medium">{faq.question}</span>
                 <ChevronDown
-                  className={`h-5 w-5 shrink-0 text-gold transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
+                  aria-hidden="true"
+                  className="h-5 w-5 shrink-0 text-gold transition-transform duration-300 group-[[open]]:rotate-180"
                 />
-              </button>
-
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    id={`faq-panel-${index}`}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-6 pb-5 text-muted leading-relaxed">
-                      {faq.answer}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              </summary>
+              <div className="px-6 pb-5 leading-relaxed text-muted">{faq.answer}</div>
+            </details>
           ))}
         </div>
       </div>
