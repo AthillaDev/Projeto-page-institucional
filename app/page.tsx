@@ -15,6 +15,12 @@ import SiteFooter from "@/components/SiteFooter"
 export default function Page() {
   return (
     <>
+      <a
+        href="#top"
+        className="sr-only z-60 rounded-full bg-gold px-4 py-2 font-semibold text-bg focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+      >
+        Pular para o conteúdo
+      </a>
       <SiteHeader />
       <main id="top" className="bg-bg text-ink">
         <HeroSection />
