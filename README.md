@@ -2,6 +2,12 @@
 
 Landing page de uma instituição de ensino **fictícia** ("Cerne"), feita como template: todo o conteúdo fica em um único arquivo (`src/content/site.ts`), e o formulário de candidatura salva os leads em um webhook configurável. Todos os nomes, dados, depoimentos e valores são ilustrativos e devem ser substituídos por informações reais antes de qualquer publicação.
 
+**Demo ao vivo:** [projeto-page-institucional.vercel.app](https://projeto-page-institucional.vercel.app/)
+
+![Tela inicial da landing page](docs/screenshots/home.png)
+
+Para entender o contexto e as decisões do projeto, veja [docs/CONTEXTO.md](docs/CONTEXTO.md). Para adaptar o template, veja [docs/PERSONALIZACAO.md](docs/PERSONALIZACAO.md).
+
 ## Tecnologias
 
 - [Next.js](https://nextjs.org) 16.4 (App Router) + React 19
