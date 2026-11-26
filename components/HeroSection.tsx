@@ -35,15 +35,11 @@ export default function HeroSection() {
             {hero.badge.toUpperCase()}
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-6 text-balance font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl"
-          >
+          {/* Sem animação de entrada: é o elemento LCP, e o texto precisa aparecer já no HTML do servidor. */}
+          <h1 className="mb-6 text-balance font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
             {hero.titleStart}{" "}
             <span className="italic text-gold">{hero.titleHighlight}</span> {hero.titleEnd}
-          </motion.h1>
+          </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
