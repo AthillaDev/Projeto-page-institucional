@@ -81,6 +81,12 @@ As seções da home, na ordem em que aparecem: Hero, Pilares, Problema/Solução
 - Revisão jurídica de **Termos de Uso** e **Política de Privacidade**, que são apenas modelos.
 - Revisar o uso de marcas de terceiros (ChatGPT, Claude, Gemini etc.) e a afirmação de ferramentas incluídas.
 
+## Licença
+
+Distribuído sob a [licença MIT](LICENSE). Você pode usar, modificar e vender este código, desde que mantenha o aviso de copyright. O software é fornecido sem garantias.
+
+A marca "Cerne" e todo o conteúdo de demonstração (textos, depoimentos, estatísticas e preços) são fictícios e não fazem parte da licença: substitua-os antes de usar em um projeto real.
+
 ## Deploy
 
 O projeto é compatível com a Vercel. Ajuste `url` em `src/content/site.ts` para o domínio final e configure as variáveis de ambiente do projeto.
